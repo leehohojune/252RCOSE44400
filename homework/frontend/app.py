@@ -15,7 +15,9 @@ def index():
     - Extract the message from the JSON response
     - Render index.html and pass the message as "current_message"
     """
-    pass
+    response = requests.get(BACKEND_URL + "/api/message")
+    message = response.json().get("message", "")
+    return render_template("index.html", current_message=message)
 
 
 @app.route("/update", methods=["POST"])
@@ -27,7 +29,9 @@ def update():
       with JSON body { "message": new_message }
     - Redirect back to "/"
     """
-    pass
+    new_message = request.form.get("new_message", "")
+    response = requests.post(BACKEND_URL + "/api/message", json={"message": new_message})
+    return redirect("/")
 
 
 # v2 TODO:
