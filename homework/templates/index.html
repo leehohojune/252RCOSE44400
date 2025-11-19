@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Frontend Service</title>
+</head>
+<body>
+    <h1>Frontend Service</h1>
+
+    <h2>Current Message:</h2>
+    <p id="current-message">{{ current_message }}</p>
+
+    <h2>Update Message</h2>
+    <form action="/update" method="post">
+        <input type="text" name="new_message" placeholder="Type new message" required>
+        <button type="submit">Update</button>
+    </form>
+</body>
+</html>
