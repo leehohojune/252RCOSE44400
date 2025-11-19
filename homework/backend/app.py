@@ -27,6 +27,8 @@ def write_message(msg: str):
     - Write msg to the file
     """
     os.makedirs(os.path.dirname(DATA_PATH), exist_ok=True)
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    msg = f"{msg} (updated at {timestamp})"
     with open(DATA_PATH, "w") as f:
         f.write(msg)
 
@@ -55,6 +57,11 @@ def update_message():
     message = data.get("message", "")
     write_message(message)
     return jsonify({"status": "ok"})
+
+
+@app.route("/api/health", methods=["GET"])
+def health():
+    return jsonify({"status": "healthy"})
 
 
 # v1 has no /api/health endpoint

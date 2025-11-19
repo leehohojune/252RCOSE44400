@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Frontend Service</title>
+    <title>Frontend Service v2</title>
 </head>
 <body>
     <h1>Frontend Service</h1>
 
     <h2>Current Message:</h2>
     <p id="current-message">{{ current_message }}</p>
+    <p id="last-updated">Last updated at: {{ last_updated or "N/A" }}</p>
 
     <h2>Update Message</h2>
     <form action="/update" method="post">

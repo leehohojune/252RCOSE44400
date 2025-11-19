@@ -16,8 +16,25 @@ def index():
     - Render index.html and pass the message as "current_message"
     """
     response = requests.get(BACKEND_URL + "/api/message")
-    message = response.json().get("message", "")
-    return render_template("index.html", current_message=message)
+    stored_message = response.json().get("message", "")
+
+    current_message = stored_message
+    last_updated = ""
+
+    marker = " (updated at "
+    if stored_message.endswith(")") and marker in stored_message:
+        base, _, ts_part = stored_message.rpartition(marker)
+        if base:
+            current_message = base
+        if ts_part.endswith(")"):
+            ts_part = ts_part[:-1]
+        last_updated = ts_part
+
+    return render_template(
+        "index.html",
+        current_message=current_message,
+        last_updated=last_updated,
+    )
 
 
 @app.route("/update", methods=["POST"])
