@@ -1,1 +1,2 @@
-# List the required libraries here.
+boto3
+textblob
